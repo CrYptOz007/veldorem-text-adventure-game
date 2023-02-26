@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Entrance - Veldorem</title>
+
+  <link rel="stylesheet" type="text/css" href="../../css/style.css">
+  <script src="../../js/class.js"></script>
+  <script src="../../js/game.js"></script>
+  <script src="../../js/characters.js"></script>
+  <script src="../../js/locations.js"></script>
+  <script src="../../js/object.js"></script>
+  <script src="../../js/battle.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <script>
+    setLocalStorage("savedLocation", window.location.pathname.split("/").pop().split(".").join("."))
+    var thisLocation = eval(window.location.pathname.split("/").pop().split(".").shift())
+  </script>
+  <table id="mainTable">
+    <tbody>
+      <tr>
+        <th>Image</th>
+        <th>Activity Log</th>
+      </tr>
+
+      <tr>
+        <td id="locationImage">
+        </td>
+        <td>
+          <select class="refreshContent" size="10" style="width:100%; height:100%">
+            <script>refreshContent("activityLog")</script>
+          </select>
+        </td>
+      </tr>
+
+      <tr>
+        <th id="locationName"></th>
+        <th>Player Inventory</th>
+      </tr>
+
+      <tr>
+        <td id="mainContent" rowspan="2">
+          <p id="locationDescription"></p>
+          <p id="locationInventory"></p>
+          <form autocomplete="off" onSubmit="playerAction();">>
+            <div class="autocomplete" style="width: 100%">
+              <input id="answer" type="text" maxlength="55" placeholder="_" autofocus autocomplete="off" />
+            </div>
+            <input type="submit" class="submit" value="Submit">
+          </form>
+          <br>
+          <div>
+            <i class="fas fa-plus" style="color: black"></i><div id="playerHealth"><p id="playerHealthNumber"><div id="playerHealthBar"></div></p></div>
+          </div>
+        </td>
+        <td height="100%">
+          <div height="100%" id="playerInventory"><script>showInventory("playerInventory")</script></div>
+        </td>
+
+      </tr>
+      <tr colspan="1">
+        <td style="display: none">
+        </td>
+        <td>
+          <!-- Player Stats Table -->
+          <table id="statsTable">
+            <tr>
+              <th colspan="2">Player Stats</th>
+            </tr>
+            <tr>
+              <td>
+                <p>Balance:&nbsp;<p style="color: orange" id="playerBalance"></p></p><p style="color: orange">&nbsp;Gold</p><br>
+                <p>Retreat Attempts:&nbsp;<p style="color: red" id="retreatAttempts"></p></p><br>
+                <p>Equiped Sword:&nbsp;<p style="color: green" id="activeSword"></p></p><br>
+                <p>Equiped Armour:&nbsp;<p style="color: green" id="activeArmour"></p></p><br>
+              </td>
+              <td>
+                <p>Current Weight:&nbsp;<p style="color: grey" id="currentWeight"></p></p><br>
+                <p>Attack Damage:&nbsp;<p style="color: red" id="swordDamage"></p></p><br>
+                <p>Armour Protection:&nbsp;<p style="color: red" id="armourValue"></p></p><br>
+                <p>Active Potions:&nbsp;<p style="color: green" id="activePotions"></p></p><br>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+  autocomplete(document.getElementById("answer"), autoCommands);
+  initialisePage(thisLocation);
+  </script>
+</body>
+</html>
